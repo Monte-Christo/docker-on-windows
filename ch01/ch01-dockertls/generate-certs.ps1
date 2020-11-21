@@ -228,5 +228,5 @@ if ($machineName) {
 }
 
 Write-Host "`n=== Finished"
-Write-Host "Now restart Docker service with the following command:"
+Write-Host "Make sure you restrat the Docker service with:"
 Write-Host "restart-service docker"

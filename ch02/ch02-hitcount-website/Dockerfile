@@ -1,5 +1,5 @@
 # escape=`
-FROM microsoft/dotnet:2.2-sdk-nanoserver-1809 AS builder
+FROM mcr.microsoft.com/dotnet/sdk:5.0 as builder
 
 WORKDIR C:\src
 COPY src .
@@ -8,11 +8,10 @@ USER ContainerAdministrator
 RUN dotnet restore && dotnet publish
 
 # app image
-FROM microsoft/dotnet:2.2-aspnetcore-runtime-nanoserver-1809
-
+FROM mcr.microsoft.com/dotnet/aspnet:5.0
 EXPOSE 80
 WORKDIR C:\dotnetapp
 RUN mkdir app-state
 
 CMD ["dotnet", "HitCountWebApp.dll"]
-COPY --from=builder C:\src\bin\Debug\netcoreapp2.2\publish .
+COPY --from=builder C:\src\bin\Debug\net5.0\publish .
